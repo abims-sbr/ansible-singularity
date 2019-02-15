@@ -1,0 +1,56 @@
+---
+
+- name: singularity | Uninstall singularity
+  package:
+    state: absent
+    name: singularity
+
+- name: singularity | install software base
+  package:
+    state: present
+    name: "{{ singularity_software_base }}"
+
+- name: singularity | check Go dependencies installed
+  shell: 'bash -c "go list github.com/golang/dep"'
+  register: go_installed
+  changed_when: False
+  failed_when: False
+
+- name: singularity | install Go dependencies
+  command: go get -u -v github.com/golang/dep/cmd/dep
+  when: go_installed.rc == 1
+
+- name: singularity | create directory for singularity
+  file:
+    path: "$GOROOT/src/github.com/sylabs/"
+    recurse: yes
+
+- name: singularity | clone the Singularity repository
+  git:
+    repo: https://github.com/sylabs/singularity.git
+    version: v{{ singularity_version }}
+    dest: "$GOROOT/src/github.com/sylabs/singularity"
+
+- name: singularity | check singularity installed version
+  shell: 'bash -c "singularity --version | grep \"{{ singularity_version }}\""'
+  register: singularity_installed_version
+  changed_when: False
+  failed_when: False
+
+- name: singularity | compile the Singularity binary | mconfig
+  command: ./mconfig
+  args:
+    chdir: $GOROOT/src/github.com/sylabs/singularity
+  when: singularity_installed_version.rc == 1
+
+- name: singularity | compile the Singularity binary | make
+  command: make -C builddir
+  args:
+    chdir: $GOROOT/src/github.com/sylabs/singularity
+  when: singularity_installed_version.rc == 1
+
+- name: singularity | compile the Singularity binary | make install
+  command: make -C builddir install
+  args:
+    chdir: $GOROOT/src/github.com/sylabs/singularity
+  when: singularity_installed_version.rc == 1
