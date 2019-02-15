@@ -1,0 +1,9 @@
+# test file for r
+---
+- hosts: localhost
+  connection: local
+  become: true
+  roles:
+    - ../../
+  vars:
+    singularity_version: "3.0.3"
