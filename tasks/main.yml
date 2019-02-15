@@ -9,6 +9,18 @@
     - "default.yml"
   tags: vars
 
+- name: debug - path
+  command: echo $PATH
+  register: path
+
+- debug: mgs="{{ path.stout }}"
+
+- name: debug - path
+  command: cat /etc/profile.d/golang.sh
+  register: profile
+
+- debug: mgs="{{ profile.stout }}"
+
 - name: singularity | Uninstall singularity
   package:
     state: absent
