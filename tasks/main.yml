@@ -23,6 +23,7 @@
   shell: 'bash -c "go list github.com/golang/dep"'
   environment:
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
+    GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
   register: go_installed
   changed_when: False
@@ -32,6 +33,7 @@
   command: go get -u -v github.com/golang/dep/cmd/dep
   environment:
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
+    GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
   when: go_installed.rc == 1
 
@@ -58,6 +60,7 @@
     chdir: $GOROOT/src/github.com/sylabs/singularity
   environment:
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
+    GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
   when: singularity_installed_version.rc == 1
 
