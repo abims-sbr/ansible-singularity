@@ -1,5 +1,4 @@
 ---
-
 - name: Gather os specific variables
   include_vars: "{{ item }}"
   with_first_found:
@@ -22,7 +21,6 @@
   until: _install_result is success
   retries: 10
   delay: 2
-
 
 - name: singularity | check Go dependencies installed
   command: 'bash -c "go list github.com/golang/dep"'

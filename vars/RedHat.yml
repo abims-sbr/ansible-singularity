@@ -1,6 +1,5 @@
 ---
 # Default value for HPC
-
 singularity_software_base:
   - '@Development tools'
   - openssl-devel

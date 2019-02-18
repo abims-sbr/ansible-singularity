@@ -1,5 +1,4 @@
 ---
-
 dependencies:
   - role: gantsign.golang
     version: 2.0.4
