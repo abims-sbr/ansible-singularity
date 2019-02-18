@@ -1,3 +1,4 @@
 ---
 
+# Singularity target version
 singularity_version: "3.0.3"
