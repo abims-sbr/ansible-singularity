@@ -73,10 +73,9 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  # Test r installation
+  # Test singularity installation
   - >
-    Rscript -e  'print(gsub("I","O","PING"))'
-    | grep -q 'PONG'
+    singularity --version 
     && (echo 'Availability test: pass' && exit 0)
     || (echo 'Availability test: fail' && exit 1)
 

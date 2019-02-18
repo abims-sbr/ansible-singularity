@@ -10,6 +10,7 @@ galaxy_info:
   issue_tracker_url: https://github.com/abims-sbr/ansible-singularity/issues
   company: "Sorbonne Université, CNRS, FR2424, ABiMS, Station Biologique, 29680, Roscoff, France"
   license: "license (GNU 3.0)"
+  min_ansible_version: 2.5.0
   platforms:
     - name: EL
       versions:

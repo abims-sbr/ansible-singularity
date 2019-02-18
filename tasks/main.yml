@@ -3,7 +3,7 @@
 - name: Gather os specific variables
   include_vars: "{{ item }}"
   with_first_found:
-    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version | int }}.yml"
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
     - "default.yml"
@@ -18,9 +18,14 @@
   package:
     state: present
     name: "{{ singularity_software_base }}"
+  register: _install_result
+  until: _install_result is success
+  retries: 10
+  delay: 2
+
 
 - name: singularity | check Go dependencies installed
-  shell: 'bash -c "go list github.com/golang/dep"'
+  command: 'bash -c "go list github.com/golang/dep"'
   environment:
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
@@ -49,7 +54,7 @@
     dest: "{{ golang_install_dir }}/src/github.com/sylabs/singularity"
 
 - name: singularity | check singularity installed version
-  shell: 'bash -c "singularity --version | grep \"{{ singularity_version }}\""'
+  command: 'bash -c "singularity --version | grep \"{{ singularity_version }}\""'
   register: singularity_installed_version
   changed_when: False
   failed_when: False
@@ -85,7 +90,7 @@
   when: singularity_installed_version.rc == 1
 
 - name: singularity | check singularity installed version
-  shell: 'bash -c "singularity --version | grep \"{{ singularity_version }}\""'
+  command: 'bash -c "singularity --version | grep \"{{ singularity_version }}\""'
   register: singularity_installed_version
   changed_when: False
   failed_when: False
