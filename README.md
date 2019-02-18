@@ -1,5 +1,7 @@
 # Ansible Role: Singularity
 
+[![Build Status](https://travis-ci.org/abims-sbr/ansible-singularity.svg?branch=master)](https://travis-ci.org/abims-sbr/ansible-singularity)
+
 An Ansible Role that installs [Singularity](https://www.sylabs.io/singularity/) on Linux.
 
 ## Requirements
