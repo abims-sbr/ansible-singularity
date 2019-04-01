@@ -92,3 +92,11 @@
   register: singularity_installed_version
   changed_when: False
   failed_when: False
+
+- name: singularity | config bind bind_path
+  lineinfile:
+    path: /etc/singularity/singularity.conf
+    line: 'bind path = {{ item }}'
+    create: yes
+    backup: yes
+  with_items: "{{ bind_paths }}"
