@@ -95,7 +95,7 @@
 
 - name: singularity | config bind bind_path
   lineinfile:
-    path: /etc/singularity/singularity.conf
+    path: "{{ singularity_conf_path }}"
     line: 'bind path = {{ item }}'
     create: yes
     backup: yes
