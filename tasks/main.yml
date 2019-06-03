@@ -38,7 +38,7 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
-  when: 
+  when:
     - not ansible_check_mode
     - go_installed.rc == 1
 
@@ -67,7 +67,7 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
-  when: 
+  when:
     - not ansible_check_mode
     - singularity_installed_version.rc == 1
 
@@ -79,7 +79,7 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
-  when: 
+  when:
     - not ansible_check_mode
     - singularity_installed_version.rc == 1
 
@@ -91,7 +91,7 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
-  when: 
+  when:
     - not ansible_check_mode
     - singularity_installed_version.rc == 1
 
