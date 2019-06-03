@@ -38,7 +38,9 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
-  when: go_installed.rc == 1
+  when:
+    - not ansible_check_mode
+    - go_installed.rc == 1
 
 - name: singularity | create directory for singularity
   file:
@@ -65,7 +67,9 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
-  when: singularity_installed_version.rc == 1
+  when:
+    - not ansible_check_mode
+    - singularity_installed_version.rc == 1
 
 - name: singularity | compile the Singularity binary | make
   command: make -C builddir
@@ -75,7 +79,9 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
-  when: singularity_installed_version.rc == 1
+  when:
+    - not ansible_check_mode
+    - singularity_installed_version.rc == 1
 
 - name: singularity | compile the Singularity binary | make install
   command: make -C builddir install
@@ -85,7 +91,9 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
-  when: singularity_installed_version.rc == 1
+  when:
+    - not ansible_check_mode
+    - singularity_installed_version.rc == 1
 
 - name: singularity | check singularity installed version
   command: 'bash -c "singularity --version | grep \"{{ singularity_version }}\""'
@@ -99,4 +107,4 @@
     line: 'bind path = {{ item }}'
     create: yes
     backup: yes
-  with_items: "{{ bind_paths }}"
+  with_items: "{{ bind_paths | default([]) }}"
