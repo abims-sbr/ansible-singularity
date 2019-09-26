@@ -8,3 +8,4 @@ singularity_software_base:
   - squashfs-tools
   - libseccomp-dev
   - pkg-config
+  - git
