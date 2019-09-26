@@ -40,6 +40,11 @@ Roles:
       file:
         path: "{{ golang_install_dir }}"
         recurse: yes
+    - name: apt update
+      apt:
+        cache_valid_time: 3600
+        update_cache: yes
+      when: ansible_os_family == "Debian"
   roles:
     - singularity
 ```
