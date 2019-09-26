@@ -72,9 +72,8 @@
     - singularity_installed_version.rc == 1
 
 - name: singularity | compile the Singularity binary | make
-  command: make -C builddir
-  args:
-    chdir: "{{ golang_install_dir }}/src/github.com/sylabs/singularity"
+  make:
+    chdir: "{{ golang_install_dir }}/src/github.com/sylabs/singularity/builddir"
   environment:
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
@@ -84,9 +83,9 @@
     - singularity_installed_version.rc == 1
 
 - name: singularity | compile the Singularity binary | make install
-  command: make -C builddir install
-  args:
-    chdir: "{{ golang_install_dir }}/src/github.com/sylabs/singularity"
+  make:
+    target: install
+    chdir: "{{ golang_install_dir }}/src/github.com/sylabs/singularity/builddir"
   environment:
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
