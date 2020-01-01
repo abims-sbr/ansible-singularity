@@ -18,12 +18,14 @@ singularity_version: "3.0.3"
 ```
 
 From the role gantsign.golang
-```yaml
-# Base installation directory the Go language SDK distribution
-golang_install_dir: '/opt/go/{{ golang_version }}'
 
+```yaml
+# Required
 # Location for GOPATH environment variable
 golang_gopath: /opt/go/packages
+
+# Base installation directory the Go language SDK distribution
+golang_install_dir: '/opt/go/{{ golang_version }}'
 ```
 
 ## Dependencies
@@ -55,4 +57,6 @@ GNU General Public License v3.0
 
 ## Author Information
 
-This role was created in 2019 by [Gildas Le Corguillé](https://github.com/lecorguille)
+This role is modified by [Shoma Kokuryo](https://github.com/pddg).
+The original is created by [Gildas Le Corguillé](https://github.com/lecorguille).
+
