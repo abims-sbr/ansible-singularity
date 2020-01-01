@@ -106,4 +106,4 @@
     line: 'bind path = {{ item }}'
     create: yes
     backup: yes
-  with_items: "{{ bind_paths | default([]) }}"
+  with_items: "{{ singularity_bind_paths }}"

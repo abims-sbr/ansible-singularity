@@ -4,7 +4,7 @@ singularity_version: "3.0.3"
 
 singularity_conf_path: "/usr/local/etc/singularity/singularity.conf"
 
-bind_paths: []
+singularity_bind_paths: []
 # example
 # - /shared/home/
 # - /shared/project/
