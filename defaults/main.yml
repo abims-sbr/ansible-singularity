@@ -1,6 +1,6 @@
 ---
 # Singularity target version
-singularity_version: "3.0.3"
+singularity_version: "3.5.2"
 
 singularity_conf_path: "/usr/local/etc/singularity/singularity.conf"
 
