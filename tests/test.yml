@@ -12,4 +12,4 @@
     - ../../
   vars:
     golang_gopath: /opt/go/packages
-    singularity_version: "3.0.3"
+    singularity_version: "3.6.0"
