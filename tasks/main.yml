@@ -32,25 +32,21 @@
   changed_when: False
   failed_when: False
 
-- name: singularity | remove older Go installation
+- name: singularity | get older go installation(s)
+  find:
+    paths: /opt/go/
+    file_type: directory
+    use_regex: yes
+    patterns: ['^(?!{{ golang_version }})1.[0-9]{1,2}(.[0-9]{1,2}|)$']
+  register: older_go_versions
+  when: only_one_go_version
+
+- name: singularity | remove older Go installation(s)
   file:
-    path: '/opt/go/{{ item }}'
+    path: '{{ item.path }}'
     state: absent
-  with_items: "{{ old_go_versions }}"
-  
-- name: singularity | install dependencies
-  apt:
-    pkg:
-    - build-essential
-    - uuid-dev
-    - libgpgme-dev
-    - squashfs-tools
-    - libseccomp-dev
-    - wget
-    - pkg-config
-    - git
-    - cryptsetup-bin
-    update_cache: yes
+  with_items: "{{ older_go_versions.files }}"
+  when: only_one_go_version
 
 - name: singularity | install Go dependencies
   command: go get -u -v github.com/golang/dep/cmd/dep
