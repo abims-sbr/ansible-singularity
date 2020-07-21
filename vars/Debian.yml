@@ -2,10 +2,11 @@
 # Default value for HPC
 singularity_software_base:
   - build-essential
-  - libssl-dev
   - uuid-dev
-  - libgpgme11-dev
+  - libgpgme-dev
   - squashfs-tools
   - libseccomp-dev
+  - wget
   - pkg-config
   - git
+  - cryptsetup-bin
