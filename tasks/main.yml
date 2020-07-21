@@ -49,7 +49,7 @@
     - wget
     - pkg-config
     - git
-    - cryptsetup-b
+    - cryptsetup-bin
     state: latest
 
 - name: singularity | install Go dependencies
