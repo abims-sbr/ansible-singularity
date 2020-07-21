@@ -10,4 +10,4 @@ bind_paths: []
 # - /shared/project/
 
 #go variables
-only_one_go_version: true
+only_one_go_version: false
