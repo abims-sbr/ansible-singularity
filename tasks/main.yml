@@ -37,6 +37,20 @@
     path: '/opt/go/{{ item }}'
     state: absent
   with_items: "{{ old_go_versions }}"
+  
+- name: singularity | install dependencies
+  apt:
+    pkg:
+    - build-essential
+    - uuid-dev
+    - libgpgme-dev
+    - squashfs-tools
+    - libseccomp-dev
+    - wget
+    - pkg-config
+    - git
+    - cryptsetup-b
+    state: latest
 
 - name: singularity | install Go dependencies
   command: go get -u -v github.com/golang/dep/cmd/dep
