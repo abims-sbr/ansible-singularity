@@ -42,16 +42,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - distro: centos7
-            playbook: converge.yml
-          - distro: ubuntu1804
-            playbook: converge.yml
-          - distro: debian9
-            playbook: converge.yml
-          - distro: centos7
-            playbook: version.yml
-          - distro: ubuntu1804
-            playbook: version.yml
+          - centos8
+          - centos7
+          - ubuntu1804
+          - ubuntu2004
 
     steps:
       - name: Check out the codebase.
