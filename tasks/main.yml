@@ -48,6 +48,22 @@
   with_items: "{{ older_go_versions.files }}"
   when: only_one_go_version
 
+- name: singularity | get Go version
+  command: go version
+  environment:
+    PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
+    GOROOT: '{{ golang_install_dir }}'
+    GOPATH: '{{ golang_gopath }}'
+  register: go_versions
+
+- name: singularity | display Go version
+  debug:
+    var: go_versions
+  environment:
+    PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
+    GOROOT: '{{ golang_install_dir }}'
+    GOPATH: '{{ golang_gopath }}'
+
 - name: singularity | install Go dependencies
   command: go get -u -v github.com/golang/dep/cmd/dep
   environment:
