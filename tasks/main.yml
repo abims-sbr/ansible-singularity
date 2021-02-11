@@ -132,10 +132,10 @@
     - singularity_installed_version.rc == 1
 
 - name: singularity | check singularity installed version
-  command: 'bash -c "singularity --version | grep \"{{ singularity_version }}\""'
+  command: 'singularity --version | grep "{{ singularity_version }}"'
   register: singularity_installed_version
   changed_when: false
-  failed_when: false
+  # failed_when: false
 
 - name: singularity | display singularity installed version
   debug:
