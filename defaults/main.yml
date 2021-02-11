@@ -9,5 +9,5 @@ bind_paths: []
 # - /shared/home/
 # - /shared/project/
 
-#go variables
+# go variables
 only_one_go_version: false

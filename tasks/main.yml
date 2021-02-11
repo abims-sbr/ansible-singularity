@@ -2,10 +2,10 @@
 - name: Gather os specific variables
   include_vars: "{{ item }}"
   with_first_found:
-    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version | int }}.yml"
-    - "{{ ansible_distribution }}.yml"
-    - "{{ ansible_os_family }}.yml"
-    - "default.yml"
+    - files:
+        - "vars/{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+        - "vars/{{ ansible_os_family }}.yml"
+      skip: true
   tags: vars
 
 - name: singularity | Uninstall singularity
@@ -29,14 +29,14 @@
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
   register: go_installed
-  changed_when: False
-  failed_when: False
+  changed_when: false
+  failed_when: false
 
 - name: singularity | get older go installation(s)
   find:
     paths: /opt/go/
     file_type: directory
-    use_regex: yes
+    use_regex: true
     patterns: ['^(?!{{ golang_version }})1.[0-9]{1,2}(.[0-9]{1,2}|)$']
   register: older_go_versions
   when: only_one_go_version
@@ -61,7 +61,7 @@
 - name: singularity | create directory for singularity
   file:
     path: "{{ golang_install_dir }}/src/github.com/sylabs/"
-    recurse: yes
+    recurse: true
 
 - name: singularity | clone the Singularity repository
   git:
@@ -72,8 +72,8 @@
 - name: singularity | check singularity installed version
   command: 'bash -c "singularity --version | grep \"{{ singularity_version }}\""'
   register: singularity_installed_version
-  changed_when: False
-  failed_when: False
+  changed_when: false
+  failed_when: false
 
 - name: singularity | compile the Singularity binary | mconfig
   command: ./mconfig
@@ -113,13 +113,13 @@
 - name: singularity | check singularity installed version
   command: 'bash -c "singularity --version | grep \"{{ singularity_version }}\""'
   register: singularity_installed_version
-  changed_when: False
-  failed_when: False
+  changed_when: false
+  failed_when: false
 
 - name: singularity | config bind bind_path
   lineinfile:
     path: "{{ singularity_conf_path }}"
     line: 'bind path = {{ item }}'
-    create: yes
-    backup: yes
+    create: true
+    backup: true
   with_items: "{{ bind_paths | default([]) }}"
