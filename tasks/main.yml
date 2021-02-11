@@ -142,7 +142,7 @@
     var: singularity_make_install
 
 - name: singularity | check singularity installed version
-  command: 'singularity --version | grep "{{ singularity_version }}"'
+  command: '/usr/local/bin/singularity --version | grep "{{ singularity_version }}"'
   register: singularity_installed_version
   changed_when: false
   # failed_when: false
