@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include:
+        distro:
           - centos8
           - centos7
           - ubuntu1804
