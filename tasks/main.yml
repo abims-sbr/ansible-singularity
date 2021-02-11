@@ -115,9 +115,14 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
+  register: singularity_make
   when:
     - not ansible_check_mode
     - singularity_installed_version.rc == 1
+
+- name: singularity | debug make
+  debug:
+    var: singularity_make
 
 - name: singularity | compile the Singularity binary | make install
   make:
@@ -127,9 +132,14 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
+  register: singularity_make_install
   when:
     - not ansible_check_mode
     - singularity_installed_version.rc == 1
+
+- name: singularity | debug make install
+  debug:
+    var: singularity_make_install
 
 - name: singularity | check singularity installed version
   command: 'singularity --version | grep "{{ singularity_version }}"'
