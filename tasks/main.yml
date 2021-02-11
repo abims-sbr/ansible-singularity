@@ -137,6 +137,10 @@
   changed_when: false
   failed_when: false
 
+- name: singularity | display singularity installed version
+  debug:
+    var: singularity_installed_version
+
 - name: singularity | config bind bind_path
   lineinfile:
     path: "{{ singularity_conf_path }}"
