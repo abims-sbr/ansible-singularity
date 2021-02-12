@@ -12,3 +12,5 @@ bind_paths: []
 # go variables
 only_one_go_version: false
 golang_gopath: /opt/go/packages
+
+singularity_role_debug: false

@@ -97,6 +97,7 @@
 - name: singularity | display singularity installed version
   debug:
     var: singularity_installed_version
+  when: singularity_role_debug
 
 - name: singularity | compile the Singularity binary | mconfig
   command: ./mconfig
@@ -122,9 +123,10 @@
     - not ansible_check_mode
     - singularity_installed_version.rc == 1
 
-# - name: singularity | debug make
-#   debug:
-#     var: singularity_make
+- name: singularity | debug make
+  debug:
+    var: singularity_make
+  when: singularity_role_debug
 
 - name: singularity | compile the Singularity binary | make install
   make:
@@ -139,9 +141,10 @@
     - not ansible_check_mode
     - singularity_installed_version.rc == 1
 
-# - name: singularity | debug make install
-#   debug:
-#     var: singularity_make_install
+- name: singularity | debug make install
+  debug:
+    var: singularity_make_install
+  when: singularity_role_debug
 
 - name: singularity | check singularity installed version
   command: 'singularity --version | grep "{{ singularity_version }}"'
@@ -154,6 +157,7 @@
 - name: singularity | display singularity installed version
   debug:
     var: singularity_installed_version
+  when: singularity_role_debug
 
 - name: singularity | config bind bind_path
   lineinfile:
