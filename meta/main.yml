@@ -1,7 +1,7 @@
 ---
 dependencies:
   - role: gantsign.golang
-    version: 2.4.0
+    version: 2.9.3
 
 galaxy_info:
   role_name: singularity
