@@ -10,3 +10,4 @@ singularity_software_base:
   - pkg-config
   - git
   - cryptsetup-bin
+  - libssl-dev
