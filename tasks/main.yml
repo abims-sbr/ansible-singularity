@@ -66,7 +66,10 @@
     GOPATH: '{{ golang_gopath }}'
 
 - name: singularity | install Go dependencies
-  command: go get -u -v github.com/golang/dep/cmd/dep
+  command: "{{ item }}"
+    loop:
+      - go env -w GO111MODULE=off
+      - go get -u -v github.com/golang/dep/cmd/dep
   environment:
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
