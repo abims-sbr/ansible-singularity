@@ -68,7 +68,7 @@
 - name: singularity | install Go dependencies
   command:
     cmd: "{{ item }}"
-    loop:
+    with_items:
       - go env -w GO111MODULE=off
       - go get -u -v github.com/golang/dep/cmd/dep
   environment:
