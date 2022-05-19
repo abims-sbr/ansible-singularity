@@ -1,5 +1,1 @@
 ---
-
-# Go language SDK version number
-# Last version that is supporting `go get`
-golang_version: '1.16.15'
