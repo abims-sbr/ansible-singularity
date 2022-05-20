@@ -71,7 +71,7 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
-    GO111MODULE: off
+    GO111MODULE: 'off'
   when:
     - not ansible_check_mode
     - go_installed.rc == 1
@@ -119,7 +119,7 @@
     PATH: '{{ golang_install_dir }}/bin:{{ ansible_env.PATH }}'
     GOROOT: '{{ golang_install_dir }}'
     GOPATH: '{{ golang_gopath }}'
-    GO111MODULE: off
+    GO111MODULE: 'off'
   register: singularity_make
   when:
     - not ansible_check_mode

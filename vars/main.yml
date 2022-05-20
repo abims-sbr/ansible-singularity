@@ -3,4 +3,3 @@
 # Go language SDK version number
 # Last version to support go get
 golang_version: '1.16.15'
-
