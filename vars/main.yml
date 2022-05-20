@@ -1,0 +1,7 @@
+---
+
+# Go language SDK version number
+golang_version: '1.18.2'
+
+
+go_dep_version: v0.5.4
