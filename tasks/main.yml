@@ -74,7 +74,7 @@
     GO111MODULE: 'off'
   when:
     - not ansible_check_mode
-    - go_installed.rc == 1
+    - go_versions.rc == 1
 
 - name: singularity | create directory for singularity
   file:
